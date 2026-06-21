@@ -1,0 +1,18 @@
+<%= form_for @setting, url: project_slack_webhook_settings_path(@project), method: :put do |f| %>
+  <div class="box tabular">
+    <p>
+      <%= f.check_box :enabled %>
+      <label for="slack_webhook_setting_enabled"><%= l(:field_enabled) %></label>
+    </p>
+
+    <p>
+      <%= f.label :webhook_url, l(:field_webhook_url) %>
+      <%= f.text_field :webhook_url, size: 80 %>
+      <% if @setting.webhook_url.blank? %>
+        <em class="info"><%= l(:text_using_default_webhook) %></em>
+      <% end %>
+    </p>
+  </div>
+
+  <%= submit_tag l(:button_save) %>
+<% end %>
