@@ -3,11 +3,11 @@ require File.expand_path('../lib/redmine_slack_webhook', __FILE__)
 
 Redmine::Plugin.register :redmine_slack_webhook do
   name 'Redmine Slack Webhook'
-  author 'Your Name'
+  author 'haya58'
   description 'Slack webhook notification for Redmine'
   version '1.0.0'
-  url 'https://github.com/yourusername/redmine-slack-webhook'
-  author_url 'https://github.com/yourusername'
+  url 'https://github.com/haya58/redmine-slack-webhook'
+  author_url 'https://github.com/haya58'
 
   requires_redmine :version_or_higher => '6.0.0'
 
@@ -17,7 +17,9 @@ Redmine::Plugin.register :redmine_slack_webhook do
     'icon' => ':redmine:'
   }, partial: 'settings/slack_webhook_settings'
 
-  permission :manage_slack_webhook, { slack_webhook_settings: [:update] }
+  project_module :slack_webhook do
+    permission :manage_slack_webhook, { slack_webhook_settings: [:update] }
+  end
 end
 
 Rails.application.config.after_initialize do
@@ -25,7 +27,7 @@ Rails.application.config.after_initialize do
     Issue.send(:include, RedmineSlackWebhook::IssuePatch)
   end
 
-  unless ProjectsController.ancestors.include? RedmineSlackWebhook::ProjectsControllerPatch
-    ProjectsController.prepend(RedmineSlackWebhook::ProjectsControllerPatch)
+  unless ProjectsHelper.ancestors.include? RedmineSlackWebhook::ProjectsHelperPatch
+    ProjectsHelper.prepend(RedmineSlackWebhook::ProjectsHelperPatch)
   end
 end
