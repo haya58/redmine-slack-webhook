@@ -1,5 +1,6 @@
 require_relative 'redmine_slack_webhook/hooks'
 require_relative 'redmine_slack_webhook/issue_patch'
+require_relative 'redmine_slack_webhook/projects_controller_patch'
 require_relative 'redmine_slack_webhook/notifier'
 
 module RedmineSlackWebhook

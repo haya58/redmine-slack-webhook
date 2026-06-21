@@ -17,18 +17,15 @@ Redmine::Plugin.register :redmine_slack_webhook do
     'icon' => ':redmine:'
   }, partial: 'settings/slack_webhook_settings'
 
-  project_module :slack_webhook do
-    permission :manage_slack_webhook, { slack_webhook_settings: [:show, :update] }
-  end
-
-  menu :project_menu, :slack_webhook_settings, { controller: 'slack_webhook_settings', action: 'show' },
-       caption: :label_slack_webhook_settings,
-       after: :settings,
-       param: :project_id
+  permission :manage_slack_webhook, { slack_webhook_settings: [:update] }
 end
 
 Rails.application.config.after_initialize do
   unless Issue.included_modules.include? RedmineSlackWebhook::IssuePatch
     Issue.send(:include, RedmineSlackWebhook::IssuePatch)
+  end
+
+  unless ProjectsController.ancestors.include? RedmineSlackWebhook::ProjectsControllerPatch
+    ProjectsController.prepend(RedmineSlackWebhook::ProjectsControllerPatch)
   end
 end

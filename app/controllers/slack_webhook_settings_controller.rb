@@ -2,20 +2,17 @@ class SlackWebhookSettingsController < ApplicationController
   before_action :find_project
   before_action :authorize
 
-  def show
-    @setting = SlackWebhookSetting.find_or_initialize_by(project_id: @project.id)
-  end
-
   def update
     @setting = SlackWebhookSetting.find_or_initialize_by(project_id: @project.id)
     @setting.assign_attributes(setting_params)
 
     if @setting.save
       flash[:notice] = l(:notice_successful_update)
-      redirect_to project_slack_webhook_settings_path(@project)
     else
-      render :show
+      flash[:error] = @setting.errors.full_messages.join(', ')
     end
+
+    redirect_to settings_project_path(@project, tab: 'slack_webhook')
   end
 
   private
