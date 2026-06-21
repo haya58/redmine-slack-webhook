@@ -14,7 +14,7 @@ Redmine 6系対応。
 plugins ディレクトリへの設置
 ```bash
 cd /path/to/redmine/plugins
-git clone https://github.com/yourusername/redmine-slack-webhook.git redmine_slack_webhook
+git clone https://github.com/haya58/redmine-slack-webhook.git redmine_slack_webhook
 ```
 マイグレーション
 ```bash
