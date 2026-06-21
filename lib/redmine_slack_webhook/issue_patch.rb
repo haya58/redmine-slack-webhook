@@ -1,5 +1,5 @@
 module RedmineSlackWebhook
-  class IssuePatch
+  module IssuePatch
     def self.included(base)
       base.class_eval do
         after_create :notify_slack_on_create
