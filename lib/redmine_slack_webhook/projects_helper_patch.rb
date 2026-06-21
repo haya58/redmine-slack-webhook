@@ -4,7 +4,7 @@ module RedmineSlackWebhook
       tabs = super
       tabs << {
         name: 'slack_webhook',
-        action: :manage_slack_webhook,
+        action: :edit_project,
         partial: 'projects/settings/slack_webhook',
         label: :label_slack_webhook_settings
       }

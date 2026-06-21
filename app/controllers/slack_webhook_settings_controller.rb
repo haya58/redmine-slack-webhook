@@ -1,6 +1,6 @@
 class SlackWebhookSettingsController < ApplicationController
   before_action :find_project
-  before_action :authorize
+  before_action :check_authorization
 
   def update
     @setting = SlackWebhookSetting.find_or_initialize_by(project_id: @project.id)
@@ -19,6 +19,13 @@ class SlackWebhookSettingsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:project_id])
+  end
+
+  def check_authorization
+    unless User.current.allowed_to?(:edit_project, @project)
+      render_403
+      return false
+    end
   end
 
   def setting_params
