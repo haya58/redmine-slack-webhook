@@ -2,6 +2,18 @@
 Redmine のチケットの作成・更新情報を Webhook で Slack に通知するプラグインです。
 Redmine 6系対応。
 
+## 重要: Redmine 7 での Webhook サポートについて
+2026/06/30 にリリースされた Redmine 7 で正式に Webhook 通知機能が実装されたようです。  
+新規に Redmine を構築する場合や、アップデートが可能な場合はこのプラグインではなく公式の通知機能を使用することをおすすめします。
+
+> Feature #29664: Webhook triggers in Redmine  
+> https://www.redmine.org/projects/redmine/wiki/Changelog_7_0
+
+## Important: Webhook Support in Redmine 7
+It appears that official webhook notification functionality was implemented in Redmine 7, released on June 30, 2026.  
+If you are setting up a new Redmine instance or are able to perform an update, I recommend using the official notification feature instead of this plugin.
+
+
 ## 機能
 - チケット作成・更新時の Slack への通知
 - プロジェクトごとの通知設定
